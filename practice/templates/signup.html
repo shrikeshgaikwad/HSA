@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+    <link rel="stylesheet" href="style.css" href="{% static 'static/style.css' %}">
+
+    <style>
+        body {
+            background:linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 241, 241, 0.9) 50%, rgba(229, 229, 229, 0.9) 100%);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* A subtle geometric pattern */
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #eaeef3;
+            background-color: #000806;
+        }
+        header {
+            background-color: #0201010d;
+            color: rgb(207, 146, 4);
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        header img {
+            position: absolute;
+            top: 35px;
+            left: 40px;
+            height: 110px;
+        }
+        nav {
+
+            display: flex;
+            justify-content: space-around;
+            background-color: #413e3ec6;
+            box-shadow: 0 4px 8px rgb(255, 228, 228);
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav a:hover {
+            background-color: #181717;
+            color: rgb(253, 243, 243);
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1abc9c;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #16a085;
+        }
+        .signup-container {
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+        .signup-container h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{% static 'static/logo.png' %}" alt="Logo">
+        <h1>HAVALE SCIENCE ACADEMY</h1>
+        <h4>Way to Success</h4> 
+    </header>
+    <nav>
+        <a href="/index.html">Home</a>
+        <a href="/course.html">Courses Offered</a>
+        <a href="/result.html">Results</a>
+        <a href="/notes.html">Notes</a>
+        <a href="Events.html"> Event Gallery</a>
+        <a href="/about.html">About Us</a>
+        <a href="/contact.html">Contact Us</a>
+        <a href="loginoptions.html">Login</a>
+    </nav>
+     
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+    <div class="signup-container">
+        <h2>Signup</h2>
+        <form action="/signup/" method="post">
+            {% csrf_token %}
+            {% comment %} <input type="hidden" name="usertype" value="Student"> {% endcomment %}
+            <label for="name">Student full Name:</label>
+            <input type="text" id="name" name="name" pattern="[A-Za-z ]+" minlength="2" maxlength="20" title="Name must contain only alphabets and contain atleast two characters" required>
+            <label for="name">username:</label>
+            <input type="text" id="username" name="username" pattern="[A-Za-z ]+" minlength="2" maxlength="20" title="Name must contain only alphabets and contain atleast two characters" required>
+            <label for="mob">mobile number:</label>
+            <input type="text" id="mob" name="mob"  title="Numbers can not contain alphabets, number shuld be of exactly 10 digits, number should start with 6,7, 8 or 9" required>
+            
+            
+{% comment %} 
+            <label for="options">Select standard</label>
+            <select id="options" name="options" multiple>
+              <option value="option1">1st</option>
+              <option value="option2">2nd</option>
+              <option value="option3">3rd</option>
+              <option value="option4">4th</option>
+              <option value="option4">5th</option>
+              <option value="option4">6th</option>
+              <option value="option4">7th</option>
+              <option value="option4">8th</option>
+              <option value="option4">9th</option>
+              <option value="option4">4th</option>
+
+            </select> {% endcomment %}
+            
+            
+             
+            <label for="name">Standard:</label>
+            <input type="options" id="std" name="std" " minlength="1" maxlength="2" title="Name must contain only alphabets and contain atleast two characters" required>
+ 
+
+
+
+
+
+
+
+
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" minlength="4" title="password should containt at least 4 characters" required>
+            <button type="submit">Signup</button>
+            <a href="/login/">already have account? login here</a>
+        </form>
+    </div>
+</body>
+</html>
