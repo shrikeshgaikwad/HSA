@@ -1,4 +1,0 @@
-pip install django 
-myenv\Scripts\activate    
-cd practice 
-                                                                                                                     

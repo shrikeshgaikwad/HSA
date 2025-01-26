@@ -61,7 +61,6 @@ def login_page(request):
             print(user)
             return redirect ('/login/')
         else:
-            print(user)
             login(request,user)
             return redirect ('/studentProfile/')
     return render (request, "login.html")
