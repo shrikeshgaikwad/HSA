@@ -2,6 +2,19 @@
 
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid white;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +23,191 @@
 {% include "header.html" %}
 
 <body>
-    <h1>Your Profile</h1>
-    <ul>
+    {% for profile in profile %}
+    
+    <h1>{{ profile.Sname }}</h1>
+    <table>
+        <thead>
+            
+            <th>Std</th>
+            <th>Total Fees</th>
+            <th>Due Fees</th>
+            
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ profile.std }}</td>
+
+
+                {% endfor %}
+                {% for fees in fees %}
+                <td>{{ fees.totalFees }}</td>
+                <td>{{ fees.dueFees }}</td>
+
+
+            </tr>
+
+        {% endfor %}
+
+
+
+
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% comment %} <ul>
         {% for profile in profile %}
             <li>{{ profile.username }} - {{ profile.std }}</li>
         {% endfor %}
-    </ul>
+    </ul> {% endcomment %}
+
+<div style="height: 100px";></div>
+<div></div>
+    <style>
+        :root {
+            justify-content: center;
+            align-items: center;
+            --background: gray;
+            --foreground:rgb(40, 25, 42);
+            --card:black;
+            --card-foreground: #161616;
+            --chart-1: hsl(221.2, 83.2%, 53.3%);
+            --chart-2: hsl(212, 95%, 68%);
+            --chart-3: hsl(216, 92%, 60%);
+            --chart-4: hsl(210, 98%, 78%);
+            --chart-5: hsl(212, 97%, 87%);
+            }        
+            body {
+
+                color: var(--foreground)
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                } 
+                
+             
+        .card {
+            justify-content: center;
+            align-items: center;
+          width: 400px;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          background: var(--card);
+          overflow: hidden;
+        }
+    
+        .card-header, .card-footer {
+            justify-content: center;
+            align-items: center;
+          padding: 16px;
+          border-bottom: 1px solid #ddd;
+        }
+    
+        .card-header h2, .card-header p {
+          margin: 0;
+        }
+    
+        .card-content {
+          padding: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+    
+        .card-footer {
+          border-top: 1px solid #ddd;
+        }
+    
+        .chart-tooltip {
+          position: absolute;
+          pointer-events: none;
+          background: green;
+          padding: 8px;
+          border-radius: 4px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          display: none;
+          font-size: 12px;
+        }
+      </style> 
+    </head>
+    <body>
+      <div class="card">
+        <div class="card-header">
+          <h2>Pie Chart</h2>
+          <p>January 2025</p>
+        </div>
+        <div class="card-content">
+          <div id="chart"></div>
+        </div>
+        <div class="card-footer">
+          <p>Monthly Attendance</p>
+        </div>
+      </div>
+    
+      <div class="chart-tooltip" id="tooltip"></div>
+    
+      <script src="https://d3js.org/d3.v7.min.js"></script>
+      <script>
+        const data = [
+          { status: "Present", days: 25, color: "var(--chart-1)" },
+          { status: "Absent", days: 5, color: "var(--chart-2)" },
+          { status: "holidays", days: 1, color: "var(--chart-5)" },
+    
+    
+        ];
+    
+        const width = 250;
+        const height = 250;
+        const radius = Math.min(width, height) / 2;
+    
+        const svg = d3
+          .select("#chart")
+          .append("svg")
+          .attr("width", width)
+          .attr("height", height)
+          .append("g")
+          .attr("transform", `translate(${width / 2}, ${height / 2})`);
+    
+        const pie = d3.pie().value((d) => d.days);
+        const arc = d3.arc().innerRadius(0).outerRadius(radius);
+    
+        const tooltip = d3.select("#tooltip");
+    
+        svg
+          .selectAll("path")
+          .data(pie(data))
+          .enter()
+          .append("path")
+          .attr("d", arc)
+          .attr("fill", (d) => d.data.color)
+          .on("mouseover", function (event, d) {
+            tooltip
+              .style("display", "block")
+              .html(`${d.data.status}: ${d.data.days} Days`)
+              .style("left", event.pageX + 10 + "px")
+              .style("top", event.pageY - 20 + "px");
+          })
+          .on("mouseout", () => tooltip.style("display", "none"));
+      </script>
+    </body>
 </body>
 {% include "footer.html" %}
 </html>

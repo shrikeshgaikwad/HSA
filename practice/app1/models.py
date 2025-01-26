@@ -12,12 +12,12 @@ class Students(models.Model):
 
 
 
-class fees(models.Model):
+class Fees(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE, null= True , blank= True)
     username = models.CharField(max_length=20)
-    totalFees = models.IntegerField(null= True , blank= True)
-    paidFees = models.IntegerField(null= True , blank= True)
-    dueFees = models.IntegerField(null= True ,blank= True)
+    totalFees = models.IntegerField(null= True , blank= True,default=0)
+    paidFees = models.IntegerField(null= True , blank= True,default=0)
+    dueFees = models.IntegerField(null= True ,blank= True,default=0)
 
 
 class Marks(models.Model):

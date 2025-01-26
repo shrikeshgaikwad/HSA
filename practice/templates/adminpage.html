@@ -1,0 +1,83 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid white;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+</head>
+{% include "header.html" %}
+
+<body>
+    {% for profile in profile %}
+    
+    <h1>{{ profile.Sname }}</h1>
+    <table>
+        <thead>
+            
+            <th>Std</th>
+            <th>Total Fees</th>
+            <th>Due Fees</th>
+            
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ profile.std }}</td>
+
+
+                {% endfor %}
+                {% for fees in fees %}
+                <td>{{ fees.totalFees }}</td>
+                <td>{{ fees.dueFees }}</td>
+
+
+            </tr>
+
+        {% endfor %}
+
+
+
+
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% comment %} <ul>
+        {% for profile in profile %}
+            <li>{{ profile.username }} - {{ profile.std }}</li>
+        {% endfor %}
+    </ul> {% endcomment %}
+
+</body>
+{% include "footer.html" %}
+</html>

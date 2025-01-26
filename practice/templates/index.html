@@ -8,11 +8,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'static/style.css' %}">
 
 </head>
-<header>
-    <img src="static/logo.png" alt="Logo">
-    <h1>HAVALE SCIENCE ACADEMY</h1>
-    <h4>Way to Success</h4> 
-</header>
+{% include "header.html" %}
+
 <body>
     <style>
         body {
@@ -26,16 +23,7 @@
         }
     </style>
 
-    <nav>
-        <a href="">Home</a>
-        <a href="/courses/">Courses Offered</a>
-        <a href="/result/">Results</a>
-        <a href="/notes/">Notes</a>
-        <a href="/events/"> Event Gallery</a>
-        <a href="/about/">About Us</a>
-        <a href="/contact/">Contact Us</a>
-        <a href="/login/">Login</a>
-    </nav>
+
     <section id="about">
             <center>
 
@@ -74,7 +62,10 @@
         </p>
 
         <p>
-            for technical queries: shrikeshgaikwad@gmail.com
+            For Technical Queries: 
+            <a href="rahulthube0805@gmail.com">rahulthube0805@gmail.com</a> 
+            , 
+            <a href="shrikeshgaikwad@gmail.com">shrikeshgaikwad@gmail.com</a>
         </p>
     </section>
     <footer>

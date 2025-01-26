@@ -35,6 +35,10 @@ def signup (request):
             mob = mob,
         )
         messages.info(request,'Account Created successfully')
+        fees = Fees.objects.create(
+            user=user,
+            username = username,         
+        )
 
         return redirect ('/signup/')
     return render (request,"signup.html")
@@ -66,7 +70,11 @@ def login_page(request):
 def studentProfile (request):
     if request.user.is_superuser:
         profile = Students.objects.all()
+        fees = Fees.objects.all()
+        return render (request, "adminpage.html",{'profile':profile,'fees':fees})
+
     else:
         profile = Students.objects.filter(user=request.user)
-    return render (request, "studentProfile.html",{'profile':profile})
+        fees = Fees.objects.filter(user=request.user)
+        return render (request, "studentProfile.html",{'profile':profile,'fees':fees})
 
