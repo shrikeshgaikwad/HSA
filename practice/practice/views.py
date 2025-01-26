@@ -50,7 +50,6 @@ def login_page(request):
         data = request.POST
         username = data.get('username')
         password = data.get('password')
-        print(data)
         if not (User.objects.filter(username=username).exists()):
             messages.error(request,'INVALID USERNAME')
             return redirect ('/login/')
@@ -64,6 +63,8 @@ def login_page(request):
             login(request,user)
             return redirect ('/studentProfile/')
     return render (request, "login.html")
+
+
 
 @login_required
 def studentProfile (request):

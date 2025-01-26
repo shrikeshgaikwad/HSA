@@ -92,21 +92,9 @@
 </head>
 <body>
     <header>
-        <img src="{% static 'static/logo.png' %}" alt="Logo">
-        <h1>HAVALE SCIENCE ACADEMY</h1>
-        <h4>Way to Success</h4> 
+        {% include "header.html" %}
     </header>
-    <nav>
-        <a href="/index.html">Home</a>
-        <a href="/course.html">Courses Offered</a>
-        <a href="/result.html">Results</a>
-        <a href="/notes.html">Notes</a>
-        <a href="Events.html"> Event Gallery</a>
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="loginoptions.html">Login</a>
-    </nav>
-     
+
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
