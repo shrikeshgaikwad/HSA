@@ -1,0 +1,114 @@
+
+
+/* 
+
+@media (max-width: 800px){
+
+    body {
+        background:linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 241, 241, 0.9) 50%, rgba(229, 229, 229, 0.9) 100%);
+        background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); 
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #eaeef3;
+        background-color: #000806;
+        justify-content: center;
+        align-items: center;
+    }
+    header {
+        background-color: #0201010d;
+        color: rgb(207, 146, 4);
+        padding:  0;
+        
+        text-align: center;
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    header img {
+        position: absolute;
+        top: 1.2vh;
+        left: 2vw;
+        height: 40%;
+        max-width: 60%;
+    }
+    header h1{
+        display: flex;
+        color: white;
+        left: 2vw;
+
+        justify-content: right; 
+    }
+    nav {
+        display: flex;
+        justify-content: space-around;
+        background-color: #413e3ec6;
+        box-shadow: 0 4px 8px rgb(255, 228, 228);
+    }
+
+    nav a {
+        color: white;
+        padding: 14px 20px;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    nav a:hover {
+        background-color: #181717;
+        color: rgb(253, 243, 243);
+    }
+    section {
+        padding: 20px;
+        margin: 5px 20px;
+        
+        
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(30, 30, 30, 0.933);
+    }
+    section h2 {
+        color: #06ea8fe9;
+    }
+    section p {
+        color: white;
+    }
+    section ul{
+        color: white;
+    }
+    footer {
+        
+        color: rgb(247, 240, 240);
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+    }
+    .image-container {
+        position: relative;
+        width: 100%; 
+        height: 300px; /* Adjust based on your image height */
+        /* display: flex; */
+        /* justify-content: flex-end; /* Start image from the right */
+        /* align-items: center; */
+        /* overflow: hidden; */ 
+    /* }
+    .animated-image {
+        position: absolute;
+        right: -50%; /* Start completely off-screen */
+        /* transition: transform 0.5s ease; Smooth transition */
+        /* width: 200px;  */
+    /* }
+    @media (max-width: 600px) {
+        nav {
+            flex-direction: column;
+        }
+        nav a {
+            text-align: left;
+            padding: 10px;
+        }
+    }
+    h1{
+        color: white; */
+    /* } */
+
+/* } */ 
