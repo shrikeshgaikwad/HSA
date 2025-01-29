@@ -21,6 +21,9 @@
         label{
             color:white;
         }
+        h2{
+            color:white;
+        }
     </style>
     <script>
         function changeInputValue() {
@@ -39,6 +42,7 @@
 <script src="{% static 'static/script.js' %}"></script>
 
 <body>
+    <center><h1>Admin Panel</h1></center>
     
     <form action="/studentProfile/" method="post">
         {% csrf_token %}
@@ -54,11 +58,8 @@
 
     
     <center>
-        <h1>
 
-            {{standard}}
-        </h1>
-        <h1>Fees Table</h1>
+        <h2 style = "color:white">Fees Table</h2>
     </center>
     
     <table border = "1">
@@ -70,9 +71,8 @@
         </tr >
         {% for prof in profile  %}
         {% for fee in fees  %}
-        {% if fee.username == prof.username and prof.std == standard %}
-         
-                <h1>if loop</h1>
+        {% if fee.username == prof.username %}
+
         
             <tr>
                 <td>{{prof.Sname}}</td>
@@ -100,7 +100,7 @@
 
 
     <center>
-        <h1>Attendance Table</h1>
+        <h2 style = "color:white">Attendance Table</h2>
     </center>
     
     <table border = "1">
@@ -115,7 +115,7 @@
         </tr >
         {% for profile in profile  %}
         {% for attendance in attendance  %}
-        {% if attendance.username == profile.username and profile.std == standard %}
+        {% if attendance.username == profile.username %}
             <tr>
                 <td>{{profile.Sname}}</td>
                 <td>{{profile.std}}</td>
@@ -125,16 +125,7 @@
                 <td>{{attendance.date_02}}</td>
 
             </tr>
-        {% elif attendance.username == profile.username %}
-            <tr>
-                <td>{{profile.Sname}}</td>
-                <td>{{profile.std}}</td>
-                <td>{{attendance.date_01}}</td>
-                <td>{{attendance.date_02}}</td>
-                <td>{{attendance.date_02}}</td>
-                <td>{{attendance.date_02}}</td>
 
-            </tr>
 
         {% endif %}
         {% endfor %}
@@ -158,7 +149,7 @@
         
     </table>
     <center>
-        <h1>Marks Table</h1>
+        <h2 style = "color:white">Marks Table</h2>
     </center>
 
     <table border = "1">
@@ -174,7 +165,7 @@
         {% for profile in profile  %}
         {% for marks in marks  %}
         <tr>
-        {% if profile.username == marks.username and profile.std == standard %}
+        {% if profile.username == marks.username %}
                 <td>{{profile.Sname}}</td>
                 <td>{{profile.std}}</td>
                 <td>{{marks.testDate}}</td>

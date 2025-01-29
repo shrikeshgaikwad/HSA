@@ -87,16 +87,18 @@ def login_page(request):
 @login_required
 def studentProfile (request):
     if request.user.is_superuser:
-        profile = Students.objects.all()
         fees = Fees.objects.all()
         attendance = StudentAttendence.objects.all()
         marks = Marks.objects.all()
         standard = request.POST.get('std')
-        if standard == None:
-            standard = int(0)
+        if standard in (str(0), None):  
+            profile = Students.objects.all()
+
         else:
             standard = int(standard)
-        
+            profile = Students.objects.filter(std=standard)
+
+
         return render (request, "adminpage.html",{'profile':profile,'fees':fees,'attendance':attendance,'marks':marks,'standard':standard})
 
     else:
