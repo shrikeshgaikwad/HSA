@@ -3,25 +3,16 @@
 <html>
 <head>
     <title>Signup</title>
-    <link rel="stylesheet" href="style.css" href="{% static 'static/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'static/style.css' %}">
     <script src="{% static 'static/script.js' %}"></script>
 
     <style>
 
-        header {
-            background-color: #0201010d;
-            color: rgb(106, 97, 76);
-            padding: 20px 0;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        header img {
-            position: absolute;
-            top: 35px;
-            left: 40px;
-            height: 110px;
-        }
+
+
+
         nav {
 
             display: flex;
@@ -65,7 +56,7 @@
 
             justify-content: center;
             align-items: center;
-            background-color: black;
+            background-color: white;
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -109,23 +100,7 @@
             <input type="text" id="mob" name="mob"  title="Numbers can not contain alphabets, number shuld be of exactly 10 digits, number should start with 6,7, 8 or 9" required>
             
             
-{% comment %} 
-            <label for="options">Select standard</label>
-            <select id="options" name="options" multiple>
-              <option value="option1">1st</option>
-              <option value="option2">2nd</option>
-              <option value="option3">3rd</option>
-              <option value="option4">4th</option>
-              <option value="option4">5th</option>
-              <option value="option4">6th</option>
-              <option value="option4">7th</option>
-              <option value="option4">8th</option>
-              <option value="option4">9th</option>
-              <option value="option4">4th</option>
 
-            </select> {% endcomment %}
-            
-            
              
             <label for="name">Standard:</label>
             <input type="options" id="std" name="std"  minlength="1" maxlength="2" title="Name must contain only alphabets and contain atleast two characters"required>

@@ -4,6 +4,16 @@
 <html>
     <head>
         <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            
+        body{
+            display: flex;
+        }
+
+        
+        </style>
         <script src="{% static 'static/script.js' %}"></script>
         <link rel="stylesheet" type="text/css" href="{% static 'static/style.css' %}">
 
@@ -23,7 +33,7 @@
         <h2>Login</h2>
         <form action="/login/" method="post">
             {% csrf_token %}
-            <label for="username">username:</label>
+            <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
