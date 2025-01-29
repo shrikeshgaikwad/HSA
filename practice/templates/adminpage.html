@@ -3,7 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <style>
+        *{
+            margin: bottom 10px;;
+        }
         table {
+            color:white;
             width: 100%;
             border-collapse: collapse;
         }
@@ -11,11 +15,22 @@
             border: 1px solid white;
         }
         th, td {
-            padding: 8px;
+            padding: 5px;
             text-align: left;
         }
+        label{
+            color:white;
+        }
     </style>
+    <script>
+        function changeInputValue() {
+            let std = document.getElementById("std").value;
+            document.getElementById("hidden_std").value = std;
+        }
+
+    </script>
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
@@ -24,36 +39,51 @@
 <script src="{% static 'static/script.js' %}"></script>
 
 <body>
-    {% for profile in profile %}
     
-    <h1>{{ profile.Sname }}</h1>
-    <table>
-        <thead>
-            
+    <form action="/studentProfile/" method="post">
+        {% csrf_token %}
+        
+        <label style = "color:white" for="std">Enter standard</label>
+        <input style = "width:100px" type="text" id = "std" name = "std" required>
+        <button type="submit" onclick="changeInputValue()">Search</button>
+        
+    </form>
+  
+
+
+
+    
+    <center>
+        <h1>
+
+            {{standard}}
+        </h1>
+        <h1>Fees Table</h1>
+    </center>
+    
+    <table border = "1">
+        <tr>
+            <th>Name</th>
             <th>Std</th>
             <th>Total Fees</th>
             <th>Due Fees</th>
-            
-        </thead>
-        <tbody>
+        </tr >
+        {% for prof in profile  %}
+        {% for fee in fees  %}
+        {% if fee.username == prof.username and prof.std == standard %}
+         
+                <h1>if loop</h1>
+        
             <tr>
-                <td>{{ profile.std }}</td>
-
-
-                {% endfor %}
-                {% for fees in fees %}
-                <td>{{ fees.totalFees }}</td>
-                <td>{{ fees.dueFees }}</td>
-
-
+                <td>{{prof.Sname}}</td>
+                <td>{{prof.std}}</td>
+                <td>{{fee.totalFees}}</td>
+                <td>{{fee.dueFees}}</td>
             </tr>
 
+        {% endif %}
         {% endfor %}
-
-
-
-
-        </tbody>
+        {% endfor %}
     </table>
 
 
@@ -69,16 +99,103 @@
 
 
 
+    <center>
+        <h1>Attendance Table</h1>
+    </center>
+    
+    <table border = "1">
+        <tr>
+            <th>Name</th>
+            <th>Std</th>
+            <th>Present</th>
+            <th>Absent</th>
+            <th>holidays</th>
+            <th>Percentage Attendance</th>
+        
+        </tr >
+        {% for profile in profile  %}
+        {% for attendance in attendance  %}
+        {% if attendance.username == profile.username and profile.std == standard %}
+            <tr>
+                <td>{{profile.Sname}}</td>
+                <td>{{profile.std}}</td>
+                <td>{{attendance.date_01}}</td>
+                <td>{{attendance.date_02}}</td>
+                <td>{{attendance.date_02}}</td>
+                <td>{{attendance.date_02}}</td>
 
+            </tr>
+        {% elif attendance.username == profile.username %}
+            <tr>
+                <td>{{profile.Sname}}</td>
+                <td>{{profile.std}}</td>
+                <td>{{attendance.date_01}}</td>
+                <td>{{attendance.date_02}}</td>
+                <td>{{attendance.date_02}}</td>
+                <td>{{attendance.date_02}}</td>
 
+            </tr>
 
-
-    {% comment %} <ul>
-        {% for profile in profile %}
-            <li>{{ profile.username }} - {{ profile.std }}</li>
+        {% endif %}
         {% endfor %}
-    </ul> {% endcomment %}
+        {% endfor %}
+
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    </table>
+    <center>
+        <h1>Marks Table</h1>
+    </center>
+
+    <table border = "1">
+        <tr>
+            <th>Name</th>
+            <th>Std</th>
+            <th>Test Date</th>
+            <th>Subject</th>
+            <th>Max Marks</th>
+            <th>Obtained Marks</th>
+            <th>Percentage</th>
+        </tr >
+        {% for profile in profile  %}
+        {% for marks in marks  %}
+        <tr>
+        {% if profile.username == marks.username and profile.std == standard %}
+                <td>{{profile.Sname}}</td>
+                <td>{{profile.std}}</td>
+                <td>{{marks.testDate}}</td>
+                <td>{{marks.subject}}</td>
+                <td>{{marks.totalMarks}}</td>
+                <td>{{marks.obtainedMarks}}</td>
+            </tr>
+
+
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+
+    </table>
 
 </body>
 {% include "footer.html" %}
 </html>
+
+
+
+
+
