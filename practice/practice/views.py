@@ -106,3 +106,7 @@ def studentProfile (request):
         fees = Fees.objects.filter(user=request.user)
         return render (request, "studentProfile.html",{'profile':profile,'fees':fees})
 
+
+def logout_view(request):
+    logout(request)  # Logs out the user
+    return redirect('login')

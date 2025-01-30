@@ -34,6 +34,8 @@ urlpatterns = [
     path('events/',events,name="events"),
     path('contact/',contact,name="contact"),
     path('result/',result,name="result"),
+    path('logout/',logout_view,name="logout"),
+
 
 
 
