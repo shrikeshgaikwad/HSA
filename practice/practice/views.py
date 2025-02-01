@@ -5,6 +5,8 @@ from app1.models import *
 from django.contrib.auth.models import User 
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
+from app1.models import *
+from .forms import *
 # Create your views here.
 def home (request):
     return render (request, "index.html")
@@ -61,7 +63,7 @@ def login_page(request):
     if request.method == "POST":
         data = request.POST
         username = data.get('username')
-        password = data.get('password')
+        password = request.POST.get('password')
         if not (User.objects.filter(username=username).exists()):
             messages.error(request,'INVALID USERNAME')
             return redirect ('/login/')
@@ -110,3 +112,50 @@ def studentProfile (request):
 def logout_view(request):
     logout(request)  # Logs out the user
     return redirect('login')
+
+@login_required
+def manageEvent(request):
+    if request.user.is_superuser:
+        return render(request,"addEvent.html")
+
+@login_required
+def add_event(request):
+
+
+    if request.method == "POST":
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('add_event')  # Redirect after upload
+    else:
+        form = EventForm()
+        return render(request, "addEvent.html", {"form": form})
+
+
+
+
+@login_required
+def update_marks(request):
+    if request.method == "POST":
+        changes = json.loads(request.POST.get("changes"))  # Parse JSON data
+
+        try:
+            for change in changes:
+                mark = Marks.objects.get(username=change["id"])
+                setattr(mark, change["field"], change["value"])
+                mark.save()
+
+            return JsonResponse({"status": "success"})
+
+        except Marks.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Record not found"})
+
+    return JsonResponse({"status": "error", "message": "Invalid request"})
+
+
+
+
+
+def event_gallery(request):
+    events = Events.objects.all().order_by('year')
+    return render(request, 'events.html', {'events': events})

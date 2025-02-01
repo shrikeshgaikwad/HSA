@@ -66,7 +66,8 @@ class StudentAttendence(models.Model):
     date_31 = models.CharField(max_length=2,null= True , blank= True)
 
 class Events(models.Model):
-    image = models.ImageField
+    image = models.ImageField(upload_to='')  
+    year = models.IntegerField(max_length=4,null=True,blank=True)
     description = models.CharField(max_length=200)
 
 class notes(models.Model):

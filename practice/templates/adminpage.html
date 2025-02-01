@@ -33,30 +33,31 @@
             let std = document.getElementById("std").value;
             document.getElementById("hidden_std").value = std;
         }
-
-    </script>
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profile</title>
-</head>
-{% include "header.html" %}
-<script src="{% static 'static/script.js' %}"></script>
-
-<body>
-    <center><h1>Admin Panel</h1></center>
-    
-    <form action="/studentProfile/" method="post">
-        {% csrf_token %}
         
-        <label style = "color:white" for="std">Enter standard</label>
-        <input style = "width:100px" type="text" id = "std" name = "std" required>
+    </script>
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Profile</title>
+    </head>
+    {% include "header.html" %}
+    <script src="{% static 'static/script.js' %}"></script>
+    
+    <body>
+        <center><h1>Admin Panel</h1></center>
+        
+        <form action="/studentProfile/" method="post">
+            {% csrf_token %}
+            
+            <label style = "color:white" for="std">Enter standard</label>
+            <input style = "width:100px" type="text" id = "std" name = "std" required>
         <button type="submit" onclick="changeInputValue()">Search</button>
         
     </form>
     <h3 >
-            <a href="{% url 'logout' %}">Log Out</a>
+        <a href="{% url 'logout' %}">Log Out</a>
+        <a href="/addEvent/">Manage Event Gallery</a>
     </h3>
 
   
@@ -189,11 +190,123 @@
 
     </table>
 
+
 </body>
 {% include "footer.html" %}
 </html>
 
 
 
+{% comment %} 
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editable Marks Table</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        td[contenteditable="true"] {
+            background-color: #f9f9f9;
+            outline: none;
+        }
+        .disabled {
+            background-color: #ddd !important;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
 
+    <h2>Marks Table</h2>
+    
+    <!-- Buttons -->
+    <button id="enable-editing">Enable Editing</button>
+    <button id="save-changes" style="display: none;">Save</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Subject</th>
+                <th>Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mark in marks %}
+            <tr>
+                <td contenteditable="false" class="editable disabled" data-id="{{ mark.id }}" data-field="student_name">{{ mark.student_name }}</td>
+                <td contenteditable="false" class="editable disabled" data-id="{{ mark.id }}" data-field="subject">{{ mark.subject }}</td>
+                <td contenteditable="false" class="editable disabled" data-id="{{ mark.id }}" data-field="marks">{{ mark.marks }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            let changes = [];  // To store changed data
+
+            // Enable editing
+            $("#enable-editing").click(function() {
+                $(".editable").attr("contenteditable", "true").removeClass("disabled");
+                $(this).hide();
+                $("#save-changes").show();
+            });
+
+            // Track changes when editing
+            $(".editable").on("input", function() {
+                let markId = $(this).data("id");
+                let field = $(this).data("field");
+                let newValue = $(this).text();
+
+                let existing = changes.find(change => change.id === markId && change.field === field);
+                if (existing) {
+                    existing.value = newValue;  // Update existing change
+                } else {
+                    changes.push({ id: markId, field: field, value: newValue });  // Add new change
+                }
+            });
+
+            // Save changes and disable editing
+            $("#save-changes").click(function() {
+                if (changes.length > 0) {
+                    $.ajax({
+                        url: "{% url 'update_marks' %}",
+                        type: "POST",
+                        data: {
+                            changes: JSON.stringify(changes),  // Send all changes as JSON
+                            csrfmiddlewaretoken: "{{ csrf_token }}"
+                        },
+                        success: function(response) {
+                            if (response.status === "success") {
+                                alert("Changes saved successfully!");
+                                changes = [];  // Clear change list
+                                $(".editable").attr("contenteditable", "false").addClass("disabled");
+                                $("#save-changes").hide();
+                                $("#enable-editing").show();
+                            } else {
+                                alert("Error updating records: " + response.message);
+                            }
+                        }
+                    });
+                } else {
+                    alert("No changes made.");
+                    $(".editable").attr("contenteditable", "false").addClass("disabled");
+                    $("#save-changes").hide();
+                    $("#enable-editing").show();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html> {% endcomment %}

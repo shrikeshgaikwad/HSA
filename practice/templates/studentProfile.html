@@ -24,6 +24,10 @@
 <script src="{% static 'static/script.js' %}"></script>
 
 <body>
+  <h3 >
+    <a href="{% url 'logout' %}">Log Out</a>
+</h3>
+
     {% for profile in profile %}
     
     <h1>{{ profile.Sname }}</h1>

@@ -14,8 +14,7 @@ def about(request):
 def result(request):
     return render (request, "result.html")
 
-def events(request):
-    return render (request, "events.html")
+
 
 def notes_page(request):
     return render (request, "notes.html")

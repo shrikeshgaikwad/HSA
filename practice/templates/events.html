@@ -12,7 +12,14 @@
 {% include "header.html" %}
 
 <body>
-    events
+    {% for event in events %}
+    <div style="height:700px; width:500px;">
+        <img src="{{ event.image.url }}" alt="Event Image" style="width:500px; height:500px; object-fit: cover;">
+        <p>year: {{ event.year }}</p>
+        <p>{{ event.description }}</p>
+    </div>
+    {% endfor %}
+
 </body>
 {% include "footer.html" %}
 

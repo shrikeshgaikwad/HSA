@@ -20,6 +20,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from app1.views import *
 from practice.views import * 
+import json
+from django.http import JsonResponse
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,17 +34,20 @@ urlpatterns = [
     path('courses/',courses,name="courses"),
     path('about/',about,name="about"),
     path('notes/',notes_page,name="notes"),
-    path('events/',events,name="events"),
+
     path('contact/',contact,name="contact"),
     path('result/',result,name="result"),
     path('logout/',logout_view,name="logout"),
 
+    path('updatemarks/', update_marks, name='update_marks'),
+    path('addEvent/', add_event, name='add_event'),
+    path('events/',event_gallery,name="gallery"),
 
 
 
 
+]
 
 
-
-
-]# + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
