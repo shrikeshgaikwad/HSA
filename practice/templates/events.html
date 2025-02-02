@@ -10,11 +10,20 @@
 
 </head>
 {% include "header.html" %}
+<style>
+    body{
+        
+    }
+    div{
+        
+        justify content: center;
+    }
+</style>
 
 <body>
     {% for event in events %}
-    <div style="height:700px; width:500px;">
-        <img src="{{ event.image.url }}" alt="Event Image" style="width:500px; height:500px; object-fit: cover;">
+    <div style="height:400px; width:260px;">
+        <img src="{{ event.image.url }}" alt="Event Image" style="width:182px; height:255px; object-fit: cover;  border-radius: 10px;">
         <p>year: {{ event.year }}</p>
         <p>{{ event.description }}</p>
     </div>

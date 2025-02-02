@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404 
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from app1.models import * 
@@ -7,6 +7,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from app1.models import *
 from .forms import *
+from . import settings
+import os
 # Create your views here.
 def home (request):
     return render (request, "index.html")
@@ -128,8 +130,10 @@ def add_event(request):
             form.save()
             return redirect('add_event')  # Redirect after upload
     else:
+        events = Events.objects.all().order_by('-year')
+
         form = EventForm()
-        return render(request, "addEvent.html", {"form": form})
+        return render(request, "addEvent.html", {"form": form,"events":events})
 
 
 
@@ -157,5 +161,19 @@ def update_marks(request):
 
 
 def event_gallery(request):
-    events = Events.objects.all().order_by('year')
+    events = Events.objects.all().order_by('-year')
     return render(request, 'events.html', {'events': events})
+
+@login_required
+def delete_event(request, event_id):
+    events = get_object_or_404(Events, id=event_id)
+    
+    # Delete image file from media folder
+    if events.image:
+        image_path = os.path.join(settings.MEDIA_ROOT, str(events.image))
+        if os.path.exists(image_path):
+            os.remove(image_path)
+            events.delete()
+            return redirect('/addEvent/') 
+
+    # Delete the event from the database

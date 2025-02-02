@@ -41,8 +41,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Student Profile</title>
     </head>
-    {% include "header.html" %}
-    <script src="{% static 'static/script.js' %}"></script>
+    <header>
+        <img src="{% static 'static/logo.png' %}" alt="Logo">
+        <h1 >HAVALE SCIENCE ACADEMY</h1>
+        <h4>Way to Success</h4> 
+        <script src="{% static 'static/script.js' %}"></script>
+        {% comment %} <h3>MH-26-0499273</h3> {% endcomment %}
+        <span class="hamburger">&#9776;</span>
+    </header>
+    
+    
+    
+    
+    <nav>
+        <a href="/home/">Home</a>
+        <a href="/studentProfile/">Students Data</a>
+        <a href="/teachers/">Teachers Data</a>
+        <a href="/messeges/">Messages</a>
+        <a href="/managecourses/">Manage Courses</a>
+        <a href="/manageresult/">Manage Results</a>
+        <a href="/managenotes/">Manage Notes</a>
+        <a href="/addEvent/">Manage Event Gallery</a>
+        <a href="/contact/">Manage Contact</a>
+        <a href="{% url 'logout' %}">Log Out</a>
+        
+    </nav>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const hamburger = document.querySelector(".hamburger");
+            const nav = document.querySelector("nav");
+    
+            hamburger.addEventListener("click", function () {
+                nav.classList.toggle("open");
+            });
+        });
+    </script>
+    
+    
     
     <body>
         <center><h1>Admin Panel</h1></center>
@@ -56,8 +92,7 @@
         
     </form>
     <h3 >
-        <a href="{% url 'logout' %}">Log Out</a>
-        <a href="/addEvent/">Manage Event Gallery</a>
+
     </h3>
 
   

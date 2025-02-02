@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Manage Events</title>
 </head>
 <body>
     <form method="post" enctype="multipart/form-data">
@@ -11,6 +11,23 @@
         {{ form.as_p }}
         <button type="submit">Upload</button>
     </form>
+
+    {% for event in events %}
+    <div class="event-container">
+        <img src="{{ event.image.url }}" alt="Event Image" style="width:150px; height:200px; object-fit: cover;">
+        <p>Year: {{ event.year }}</p>
+        <p>{{ event.description }}</p>
+
+        <!-- Delete Button -->
+        <form action="{% url 'delete_event' event.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" style="background-color: red; color: white; border: none; padding: 5px 10px; cursor: pointer;">
+                Delete
+            </button>
+        </form>
+    </div>
+{% endfor %}
+
     
 </body>
 </html>

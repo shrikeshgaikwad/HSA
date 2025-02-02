@@ -42,6 +42,8 @@ urlpatterns = [
     path('updatemarks/', update_marks, name='update_marks'),
     path('addEvent/', add_event, name='add_event'),
     path('events/',event_gallery,name="gallery"),
+    path('delete/<int:event_id>/', delete_event, name='delete_event'),
+
 
 
 
