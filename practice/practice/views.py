@@ -97,6 +97,7 @@ def studentProfile (request):
         standard = request.POST.get('std')
         if standard in (str(0), None):  
             profile = Students.objects.all()
+            # student = auth_user.objects.all()
 
         else:
             standard = int(standard)

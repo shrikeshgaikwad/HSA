@@ -128,26 +128,13 @@
         {% endfor %}
         {% endfor %}
     </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <center>
         <h2 style = "color:white">Attendance Table</h2>
     </center>
     
     <table border = "1">
         <tr>
+            <th>Id</th>
             <th>Name</th>
             <th>Std</th>
             <th>Present</th>
@@ -160,6 +147,7 @@
         {% for attendance in attendance  %}
         {% if attendance.username == profile.username %}
             <tr>
+                <td>{{profile.id}}</td>
                 <td>{{profile.Sname}}</td>
                 <td>{{profile.std}}</td>
                 <td>{{attendance.date_01}}</td>
