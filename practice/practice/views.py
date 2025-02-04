@@ -9,6 +9,9 @@ from app1.models import *
 from .forms import *
 from . import settings
 import os
+from django.http import JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def home (request):
     return render (request, "index.html")
@@ -116,15 +119,45 @@ def logout_view(request):
     logout(request)  # Logs out the user
     return redirect('login')
 
+
+
+
 @login_required
 def manageEvent(request):
     if request.user.is_superuser:
         return render(request,"addEvent.html")
 
+
+@login_required
+def manage_notes(request):
+    if request.method == "POST":
+        form = NotesForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect ('manage_notes')
+    else:
+        note = notes.objects.all().order_by('-std')
+
+        form = NotesForm()
+        return render(request, "manageNotes.html", {"form": form,"notes":note})
+
+# @login_required
+# def delete_notes(request, notes_id):
+#     events = get_object_or_404(notes, id=notes_id)
+    
+#     # Delete image file from media folder
+#     if notes.file:
+#         file_path = os.path.join(settings.MEDIA_ROOT, str(events.image))
+#         if os.path.exists(image_path):
+#             os.remove(image_path)
+#             events.delete()
+#             return redirect('/addEvent/') 
+
+
+
+
 @login_required
 def add_event(request):
-
-
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
@@ -135,6 +168,36 @@ def add_event(request):
 
         form = EventForm()
         return render(request, "addEvent.html", {"form": form,"events":events})
+
+
+
+
+
+
+
+
+
+
+
+
+
+def event_gallery(request):
+    events = Events.objects.all().order_by('-year')
+    return render(request, 'events.html', {'events': events})
+
+@login_required
+def delete_event(request, event_id):
+    events = get_object_or_404(Events, id=event_id)
+    
+    # Delete image file from media folder
+    if events.image:
+        image_path = os.path.join(settings.MEDIA_ROOT, str(events.image))
+        if os.path.exists(image_path):
+            os.remove(image_path)
+            events.delete()
+            return redirect('/addEvent/') 
+
+
 
 
 
@@ -161,20 +224,39 @@ def update_marks(request):
 
 
 
-def event_gallery(request):
-    events = Events.objects.all().order_by('-year')
-    return render(request, 'events.html', {'events': events})
 
-@login_required
-def delete_event(request, event_id):
-    events = get_object_or_404(Events, id=event_id)
-    
-    # Delete image file from media folder
-    if events.image:
-        image_path = os.path.join(settings.MEDIA_ROOT, str(events.image))
-        if os.path.exists(image_path):
-            os.remove(image_path)
-            events.delete()
-            return redirect('/addEvent/') 
 
-    # Delete the event from the database
+@csrf_exempt
+def updateDatabase(request):
+
+    if request.method == "POST" :
+        data = json.loads(request.body)
+        updated_data = data.get('data', [])
+        print(updated_data)
+
+        for row in updated_data:
+
+            username = row.get('column_0')
+            name = row.get('column_1')
+            newstd = row.get('column_2')
+            mobile = row.get('column_3')
+            fees = row.get('column_4')
+            due = row.get('column_5')
+            try:
+                student = Students.objects.get(username=username)
+                
+                #student.Sname = name
+                student.std = newstd
+                student.mob = mobile
+                student.totalFees = fees
+                student.dueFees = due
+                student.save()
+            except Students.DoesNotExist:
+                print(f"Student with username '{username}' not found.")
+
+
+
+
+        return JsonResponse({'success': True})
+
+

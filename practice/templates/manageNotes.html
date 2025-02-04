@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Notes</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+
+
+
+    
+    
+    
+    
+    {% for notes in notes %}
+    <div class="event-container">
+        <embed src="{{ notes.pdf.url }}" type="application/pdf" width="150px" height="200px" />
+        <a href="{{ notes.pdf.url }}" target="_blank">Open PDF</a>
+        <p>std: {{ notes.std }}</p>
+        <p>{{ notes.subject }}</p>
+        <p>{{ notes.chaptername }}</p>
+        {% endfor %}
+
+        {% comment %} <form action="{% url 'delete_notes' notes.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" style="background-color: red; color: white; border: none; padding: 5px 10px; cursor: pointer;">
+                Delete
+            </button>
+        </form>
+    </div> {% endcomment %}
+    
+</body>
+</html>
