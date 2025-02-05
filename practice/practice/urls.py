@@ -34,11 +34,9 @@ urlpatterns = [
     path('courses/',courses,name="courses"),
     path('about/',about,name="about"),
     path('notes/',notes_page,name="notes"),
-
     path('contact/',contact,name="contact"),
     path('result/',result,name="result"),
     path('logout/',logout_view,name="logout"),
-
     path('updatemarks/', update_marks, name='update_marks'),
     path('addEvent/', add_event, name='add_event'),
     path('manage_notes/', manage_notes, name='manage_notes'),
@@ -47,13 +45,6 @@ urlpatterns = [
     path('delete/<int:event_id>/', delete_event, name='delete_event'),
     path('updateDatabase/',updateDatabase,name="updateDatabase"),
 
-
-
-
-
-
 ]
-
-
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

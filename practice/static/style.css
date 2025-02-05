@@ -1,9 +1,9 @@
-@media (min-width: 1025px){
-    /* * {
+@media (min-width: 1025px)
+    {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-    } */
+    } 
 
 
 
@@ -132,8 +132,9 @@
     }
 
     .login-container {
-        left: 10px;
-        justify-content: right;
+        position: absolute;
+        left: 50%;
+        top: 50%;
         background-color: white;
         border-radius: 12px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -237,7 +238,7 @@
 
 
 
-}
+
 
 
 
