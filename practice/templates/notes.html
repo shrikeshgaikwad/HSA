@@ -13,7 +13,15 @@
 {% include "header.html" %}
 
 <body>
-    notes
+    {% for notes in notes %}
+    <div class="event-container" style = "width:300px">
+        <embed src="{{ notes.noteFile.url }}" type="application/pdf" width="150px" height="200px" />
+        <a href="{{ notes.notesFile.url }}" target="_blank">Open PDF</a>
+        <p>std: {{ notes.std }}</p>
+        <p>{{ notes.subject }}</p>
+        <p>{{ notes.chaptername }}</p>
+        {% endfor %}
+
 </body>
 {% include "footer.html" %}
 

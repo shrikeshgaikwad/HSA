@@ -1,228 +1,3 @@
-{% comment %} {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-    <style>
-        *{
-            
-            margin: bottom 1px;
-            padding: bottom 10px;
-        }
-        body{
-            height: 100%;
-            margin-bottom: 100px;
-
-        }
-        table {
-            color:white;
-            width: 100%;
-            border-collapse: collapse;
-            margin : bottom 10px;
-        }
-        table, th, td {
-            border: 1px solid white;
-        }
-        th, td {
-            padding: 5px;
-            text-align: left;
-        }
-        label{
-            color:white;
-        }
-        h2{
-            color:white;
-        }
-        h3{
-            justify content:right;
-        }
-    </style>
-    <script>
-        function changeInputValue() {
-            let std = document.getElementById("std").value;
-            document.getElementById("hidden_std").value = std;
-        }
-        
-    </script>
-    <head>
-        
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>admin page</title>
-    </head>
-    <header>
-        <img src="{% static 'static/logo.png' %}" alt="Logo">
-        <h1 >HAVALE SCIENCE ACADEMY</h1>
-        <h4>Way to Success</h4> 
-        <script src="{% static 'static/script.js' %}"></script>
-        <span class="hamburger">&#9776;</span>
-    </header>
-    
-    
-    
-    
-    <nav>
-        <a href="/home/">Home</a>
-        <a href="/studentProfile/">Students Data</a>
-        <a href="/teachers/">Teachers Data</a>
-        <a href="/messeges/">Messages</a>
-        <a href="/managecourses/">Manage Courses</a>
-        <a href="/manageresult/">Manage Results</a>
-        <a href="/managenotes/">Manage Notes</a>
-        <a href="/addEvent/">Manage Event Gallery</a>
-        <a href="/contact/">Manage Contact</a>
-        <a href="{% url 'logout' %}">Log Out</a>
-        
-    </nav>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const hamburger = document.querySelector(".hamburger");
-            const nav = document.querySelector("nav");
-    
-            hamburger.addEventListener("click", function () {
-                nav.classList.toggle("open");
-            });
-        });
-    </script>
-    
-    
-    
-    <body>
-        <center><h1>Admin Panel</h1></center>
-        
-        <form action="/studentProfile/" method="post">
-            {% csrf_token %}
-            
-            <label style = "color:white" for="std">Enter standard</label>
-            <input style = "width:100px" type="text" id = "std" name = "std" required>
-        <button type="submit" onclick="changeInputValue()">Search</button>
-        
-    </form>
-    <h3 >
-
-    </h3>
-
-  
-
-
-
-    
-    <center>
-
-        <h2 style = "color:white">Fees Table</h2>
-    </center>
-    
-    <table border = "1">
-        <tr>
-            <th>Name</th>
-            <th>Std</th>
-            <th>Total Fees</th>
-            <th>Due Fees</th>
-        </tr >
-        {% for prof in profile  %}
-        {% for fee in fees  %}
-        {% if fee.username == prof.username %}
-
-        
-            <tr>
-                <td>{{prof.Sname}}</td>
-                <td>{{prof.std}}</td>
-                <td>{{fee.totalFees}}</td>
-                <td>{{fee.dueFees}}</td>
-            </tr>
-
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-    </table>
-    <center>
-        <h2 style = "color:white">Attendance Table</h2>
-    </center>
-    
-    <table border = "1">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Std</th>
-            <th>Present</th>
-            <th>Absent</th>
-            <th>holidays</th>
-            <th>Percentage Attendance</th>
-        
-        </tr >
-        {% for profile in profile  %}
-        {% for attendance in attendance  %}
-        {% if attendance.username == profile.username %}
-            <tr>
-                <td>{{profile.id}}</td>
-                <td>{{profile.Sname}}</td>
-                <td>{{profile.std}}</td>
-                <td>{{attendance.date_01}}</td>
-                <td>{{attendance.date_02}}</td>
-                <td>{{attendance.date_02}}</td>
-                <td>{{attendance.date_02}}</td>
-
-            </tr>
-
-
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-
-
-    </table>
-
-
-
-
-    <center>
-        <h2 style = "color:white">Marks Table</h2>
-    </center>
-    <table border = "1" >
-        <tr>
-            <th>Name</th>
-            <th>Std</th>
-            <th>Test Date</th>
-            <th>Subject</th>
-            <th>Max Marks</th>
-            <th>Obtained Marks</th>
-            <th>Percentage</th>
-        </tr >
-        {% for profile in profile  %}
-        {% for marks in marks  %}
-        <tr>
-        {% if profile.username == marks.username %}
-                <td>{{profile.Sname}}</td>
-                <td>{{profile.std}}</td>
-                <td>{{marks.testDate}}</td>
-                <td>{{marks.subject}}</td>
-                <td>{{marks.totalMarks}}</td>
-                <td>{{marks.obtainedMarks}}</td>
-            </tr>
-
-
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-    </table>
-
-
-
-
-</body>
-{% include "footer.html" %}
-</html>
- {% endcomment %}
-
-
-
-
-
-
-
-
-
-
 
  {% load static %}
 
@@ -289,9 +64,21 @@
             background-color: #000806;
 
         }
+        header h5{
+        text-align: right;
+            
+        }
      </style>
  
      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const hamburger = document.querySelector(".hamburger");
+            const nav = document.querySelector("nav");
+    
+            hamburger.addEventListener("click", function () {
+                nav.classList.toggle("open");
+            });
+        });
         
          function toggleEditable() {
              const tables = document.querySelectorAll('.editable');
@@ -388,19 +175,22 @@
              <img src="{% static 'static/logo.png' %}" alt="Logo">
              <h1>HAVALE SCIENCE ACADEMY</h1>
              <h4>Way to Success</h4>
-             <span class="hamburger">&#9776;</span>
+             <h5>
+                 <span class="hamburger">&#9776;</span></h5>
          </header>
  
          <nav>
-             <a href="/home/">Home</a>
+            <a href="/home/">Home</a>
              <a href="/studentProfile/">Students Data</a>
              <a href="/teachers/">Teachers Data</a>
+             <a href="/attendance/">Attendance</a>
+             <a href="/marks/">Marks</a>
+             <a href="/fees/">Fees</a>
              <a href="/messeges/">Messages</a>
-             <a href="/managecourses/">Manage Courses</a>
-             <a href="/manageresult/">Manage Results</a>
+             <a href="/manageresult/">Results</a>
              <a href="/manage_notes/">Manage Notes</a>
-             <a href="/addEvent/">Manage Event Gallery</a>
-             <a href="/contact/">Manage Contact</a>
+             <a href="/addEvent/">Manage Gallery</a>
+             <a href="/contact/">Contact</a>
              <a href="{% url 'logout' %}">Log Out</a>
          </nav>
  

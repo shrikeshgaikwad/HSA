@@ -99,7 +99,7 @@ def studentProfile (request):
         marks = Marks.objects.all()
         standard = request.POST.get('std')
         if standard in (str(0), None):  
-            profile = Students.objects.all()
+            profile = Students.objects.all().order_by('-std')
             # student = auth_user.objects.all()
 
         else:
@@ -137,21 +137,28 @@ def manage_notes(request):
             return redirect ('manage_notes')
     else:
         note = notes.objects.all().order_by('-std')
-
+        urls = [note.url for note in note]
         form = NotesForm()
-        return render(request, "manageNotes.html", {"form": form,"notes":note})
 
-# @login_required
-# def delete_notes(request, notes_id):
-#     events = get_object_or_404(notes, id=notes_id)
+        return render(request, "manageNotes.html", {"form": form,"notes":note,"urls":urls})
+
+@login_required
+def delete_notes(request, notes_id):
+    note = get_object_or_404(notes, id=notes_id)
     
-#     # Delete image file from media folder
-#     if notes.file:
-#         file_path = os.path.join(settings.MEDIA_ROOT, str(events.image))
-#         if os.path.exists(image_path):
-#             os.remove(image_path)
-#             events.delete()
-#             return redirect('/addEvent/') 
+    if notes.notesFile:
+        file_path = os.path.join(settings.MEDIA_ROOT, str(notes.notesFile))
+
+        print(f"File Path: {file_path}")
+        if os.path.exists(file_path):
+            try:
+                os.remove(file_path)
+                print("File deleted successfully.")
+            except Exception as e:
+                print(f"Error deleting file: {e}")
+    
+    note.delete()  
+    return redirect('/manage_notes/')  
 
 
 
@@ -171,20 +178,6 @@ def add_event(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-def event_gallery(request):
-    events = Events.objects.all().order_by('-year')
-    return render(request, 'events.html', {'events': events})
-
 @login_required
 def delete_event(request, event_id):
     events = get_object_or_404(Events, id=event_id)
@@ -200,6 +193,14 @@ def delete_event(request, event_id):
 
 
 
+
+
+
+
+
+def event_gallery(request):
+    events = Events.objects.all().order_by('-year')
+    return render(request, 'events.html', {'events': events})
 
 
 @login_required
@@ -260,3 +261,14 @@ def updateDatabase(request):
         return JsonResponse({'success': True})
 
 
+@login_required
+def attendance(request):
+    if request.user.is_superuser:
+        attendance = StudentAttendence.objects.all()
+        standard = request.POST.get('std')
+        if standard in (str(0), None):  
+            profile = Students.objects.all().order_by('-std')
+        else:
+            standard = int(standard)
+            profile = Students.objects.filter(std=standard)
+        return render (request, "adminattandance.html",{'profile':profile,'attendance':attendance})

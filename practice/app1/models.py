@@ -75,7 +75,7 @@ class notes(models.Model):
     subject = models.CharField(max_length=20,null = True, blank= True)
     chaptername = models.CharField(max_length=20,null = True, blank= True)
     notesFile = models.FileField(upload_to='pdfs/')
-    
+    url = models.URLField()
 
 
 class NewAttandance(StudentAttendence):

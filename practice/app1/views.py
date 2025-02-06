@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import *
 
 # Create your views here.
 def home (request):
@@ -17,7 +18,9 @@ def result(request):
 
 
 def notes_page(request):
-    return render (request, "notes.html")
+    note = notes.objects.all().order_by('-std')
+
+    return render(request, "notes.html", {"notes":note})
 
 def contact(request):
     return render (request,"contact.html")

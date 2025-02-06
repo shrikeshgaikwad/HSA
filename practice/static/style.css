@@ -15,7 +15,7 @@
 
         box-sizing: border-box;
         padding-top: 200px; 
-        background:linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 241, 241, 0.9) 50%, rgba(229, 229, 229, 0.9) 100%);
+        background:linear-gradient(135deg, rgba(10, 9, 9, 0.9) 0%, rgba(241, 241, 241, 0.9) 50%, rgba(229, 229, 229, 0.9) 100%);
         background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); 
         font-family: 'Helvetica Neue', Arial, sans-serif;
 
@@ -249,6 +249,8 @@
 
 
 
+
+
 @media (max-width: 800px) {
     * {
         margin: 0;
@@ -282,7 +284,6 @@
 
     header img {
         position: fixed;
-
         position: absolute;
         top: 1vh;
         left: 2vw;
@@ -296,14 +297,17 @@
         left: 2vw;
         justify-content: right;
     }
+    header h5{
+        text-align: right;
+    }
 
     /* Nav styles for slide-in effect */
     nav {
         position: fixed;
         top: 0;
         left: -250px; /* Initially off-screen */
-        height: 100%;
-        width: 250px; /* Adjust width as needed */
+        height: 70%;
+        width: 230px; /* Adjust width as needed */
         background-color: #413e3ec6;
         box-shadow: 4px 0 8px rgba(0, 0, 0, 0.3);
         display: flex;
@@ -409,12 +413,10 @@
         text-decoration: underline;
     }
 
-
-    /* Hamburger menu button */
     .hamburger {
         position: absolute;
         top: 10px;
-        right: 10px;
+        right: 5px;
         font-size: 24px;
         color: white;
         cursor: pointer;

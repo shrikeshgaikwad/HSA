@@ -40,10 +40,12 @@ urlpatterns = [
     path('updatemarks/', update_marks, name='update_marks'),
     path('addEvent/', add_event, name='add_event'),
     path('manage_notes/', manage_notes, name='manage_notes'),
-    # path('delete/<int:notes_id>/', delete_notes, name='delete_notes'),
+    path('delete/<int:notes_id>/', delete_notes, name='delete_notes'),
     path('events/',event_gallery,name="gallery"),
     path('delete/<int:event_id>/', delete_event, name='delete_event'),
     path('updateDatabase/',updateDatabase,name="updateDatabase"),
+    path('attendance/',attendance,name="attendence"),
+
 
 ]
 if settings.DEBUG:
