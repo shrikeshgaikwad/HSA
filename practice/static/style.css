@@ -12,14 +12,14 @@
         padding: 0;
         width: 100%;
         height: 100%;
-
+/* 
         box-sizing: border-box;
         padding-top: 200px; 
         background:linear-gradient(135deg, rgba(10, 9, 9, 0.9) 0%, rgba(241, 241, 241, 0.9) 50%, rgba(229, 229, 229, 0.9) 100%);
         background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); 
-        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-family: 'Helvetica Neue', Arial, sans-serif; */
 
-        background-color: #000806;
+        background-color:#1e40af;
         justify-content: center;
         align-items: center; 
 
@@ -39,7 +39,7 @@
 
     
     header {
-        background-color: black;
+        background-color: #60a5fa;
         color: rgb(207, 146, 4);
         top: 0;
         text-align: center;
@@ -215,6 +215,12 @@
 
 
 
+
+
+
+
+
+
     @media (max-width: 600px) {
         nav {
             flex-direction: column;
@@ -258,10 +264,10 @@
     }
     body {
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 241, 241, 0.9) 50%, rgba(229, 229, 229, 0.9) 100%);
-        background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); 
+        /* background-image: url('https://www.transparenttextures.com/patterns/cubes.png');  */
         font-family: 'Helvetica Neue', Arial, sans-serif;
-        color: #eaeef3;
-        background-color: #000806;
+        color: black;
+        background-color: white;
         justify-content: center;
         align-items: center;
         margin-top: 100px;;

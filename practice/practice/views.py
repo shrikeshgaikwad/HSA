@@ -182,7 +182,6 @@ def add_event(request):
 def delete_event(request, event_id):
     events = get_object_or_404(Events, id=event_id)
     
-    # Delete image file from media folder
     if events.image:
         image_path = os.path.join(settings.MEDIA_ROOT, str(events.image))
         if os.path.exists(image_path):
