@@ -1,45 +1,62 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'static/style.css' %}">
-
-<header>
-    <img src="{% static 'static/logo.png' %}" alt="Logo">
-    <h1 >HAVALE SCIENCE ACADEMY</h1>
-    <h4>Way to Success</h4> 
-    <script src="{% static 'static/script.js' %}"></script>
-    {% comment %} <h3>MH-26-0499273</h3> {% endcomment %}
-    <h5>
-        <span class="hamburger">&#9776;</span>
-
-    </h5>
-</header>
-
-
-
-
-<nav>
-    <a href="/home/">Home</a>
-    <a href="/courses/">Courses Offered</a>
-    <a href="/result/">Results</a>
-    <a href="/notes/">Notes</a>
-    <a href="/events/"> Event Gallery</a>
-    <a href="/about/">About Us</a>
-    <a href="/contact/">Contact Us</a>
-    <a href="/login/">Login</a>
-</nav>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const hamburger = document.querySelector(".hamburger");
-        const nav = document.querySelector("nav");
-
-        hamburger.addEventListener("click", function () {
-            nav.classList.toggle("open");
-        });
-    });
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExcelAcademy - Expert Coaching Classes</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'static/style3.css' %}">   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="{% static 'static/script3.js' %}"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <img  id='logoImg' src="{% static 'static/logo.png' %}" alt="Logo">
+        <span>Havale Science Academy</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Event Gallery</a>
+        <a href="#testimonials">Notes</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button style = "color:white;" class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a href="#contact" class="btn btn-primary enroll-btn">Login</a>
+    </div>
+  </nav>
 
 
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-container">
+      <div class="mobile-menu-header">
+        <div class="logo">
+          <i class="fas fa-book-open"></i>
+          <span>Havale Science Academy</span>
+        </div>
+        <button class="close-menu-btn" id="closeMenuBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="#home">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Event Gallery</a>
+        <a href="#testimonials">Notes</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="btn btn-primary mobile-enroll-btn">Login</a>
+    </div>
+  </div>
 
-
-
+</body>
+</html>
 
